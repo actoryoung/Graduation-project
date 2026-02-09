@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.venv/
+*.log
+
+# Data & Models (large files)
+data/
+checkpoints/
+checkpoints_archive/
+downloads/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+nul
+
+# Claude AI (private config)
+.claude/
+.clauderc
+
+# Logs & Temp
+logs/
+*.log
+
+# Streamlit config (may contain secrets)
+.streamlit/
+
+# Paper search MCP
+paper-search-mcp/
+
+# Large PDFs (reference papers)
+*.pdf
+
+# Keep project structure but exclude large/archived content
+docs_archive/
+scripts_archive/
+CMU-MultimodalSDK/
