@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- 白色背景 -->
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+
+  <!-- 顶部深蓝色条 -->
+  <rect x="0" y="0" width="1920" height="6" fill="#003366"/>
+
+  <!-- 标题区 -->
+  <rect x="60" y="50" width="6" height="36" fill="#003366"/>
+  <text x="80" y="80" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:32px; font-weight:700;" fill="#2C3E50">
+    Web演示系统
+  </text>
+
+  <!-- 系统特点 -->
+  <text x="60" y="160" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    系统特点
+  </text>
+
+  <!-- 特点卡片 -->
+  <rect x="60" y="190" width="400" height="180" fill="#F0F4F8"/>
+  <text x="90" y="240" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#003366">
+    交互式界面
+  </text>
+  <text x="90" y="280" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    基于Streamlit框架
+  </text>
+  <text x="90" y="310" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    实时分析与可视化
+  </text>
+
+  <rect x="480" y="190" width="400" height="180" fill="#F0F4F8"/>
+  <text x="510" y="240" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#003366">
+    文本输入
+  </text>
+  <text x="510" y="280" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    支持中文/英文文本
+  </text>
+  <text x="510" y="310" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    实时情感预测
+  </text>
+
+  <rect x="900" y="190" width="400" height="180" fill="#F0F4F8"/>
+  <text x="930" y="240" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#003366">
+    结果展示
+  </text>
+  <text x="930" y="280" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    三类情感概率分布
+  </text>
+  <text x="930" y="310" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    直观的数据可视化
+  </text>
+
+  <!-- 技术栈 -->
+  <text x="60" y="440" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    技术栈
+  </text>
+
+  <rect x="60" y="470" width="1240" height="120" fill="#F0F4F8"/>
+
+  <g transform="translate(90, 510)">
+    <text x="0" y="0" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+      <tspan font-weight="600" fill="#003366">深度学习框架：</tspan>PyTorch 2.5.0
+    </text>
+    <text x="400" y="0" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+      <tspan font-weight="600" fill="#003366">Web框架：</tspan>Streamlit 1.28.0
+    </text>
+    <text x="0" y="35" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+      <tspan font-weight="600" fill="#003366">特征提取：</tspan>GloVe (300D), COVAREP (74D), OpenFace (710D)
+    </text>
+  </g>
+
+  <!-- 数据集信息 -->
+  <text x="60" y="660" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    CMU-MOSEI SDK子集
+  </text>
+
+  <g transform="translate(60, 700)">
+    <rect width="4" height="4" fill="#003366"/>
+    <text x="15" y="5" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+      <tspan font-weight="700" fill="#003366">2,249</tspan> 训练样本 | <tspan font-weight="700" fill="#003366">229</tspan> 验证样本 | <tspan font-weight="700" fill="#003366">678</tspan> 测试样本
+    </text>
+  </g>
+
+  <g transform="translate(60, 750)">
+    <rect width="4" height="4" fill="#003366"/>
+    <text x="15" y="5" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+      三类情感标签：Negative (<tspan font-weight="700" fill="#FF8C00">10%</tspan>), Neutral (<tspan font-weight="700" fill="#003366">50.4%</tspan>), Positive (<tspan font-weight="700" fill="#005A9E">39.6%</tspan>)
+    </text>
+  </g>
+
+  <g transform="translate(60, 800)">
+    <rect width="4" height="4" fill="#003366"/>
+    <text x="15" y="5" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+      多模态特征：文本转录 + 音频波形 + 视频帧序列
+    </text>
+  </g>
+
+  <!-- 部署信息 -->
+  <text x="60" y="890" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    部署与访问
+  </text>
+
+  <rect x="60" y="920" width="600" height="60" fill="#003366" fill-opacity="0.05"/>
+  <g transform="translate(90, 955)">
+    <rect width="4" height="4" fill="#003366"/>
+    <text x="15" y="5" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#2C3E50">
+      本地运行：streamlit run app_s7.py
+    </text>
+  </g>
+
+  <!-- 页码 -->
+  <text x="1860" y="1040" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D" text-anchor="end">
+    07
+  </text>
+</svg>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- 白色背景 -->
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+
+  <!-- 顶部深蓝色条 -->
+  <rect x="0" y="0" width="1920" height="8" fill="#003366"/>
+
+  <!-- 主标题 -->
+  <text x="60" y="420" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:48px; font-weight:700;" fill="#003366">
+    多模态情感分析系统设计与实现
+  </text>
+
+  <!-- 副标题 -->
+  <text x="60" y="480" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:22px;" fill="#7F8C8D">
+    基于CMU-MOSEI数据集的类别不平衡优化研究
+  </text>
+
+  <!-- 分隔线 -->
+  <line x1="60" y1="510" x2="600" y2="510" stroke="#003366" stroke-width="2"/>
+
+  <!-- 核心指标 -->
+  <g transform="translate(60, 560)">
+    <rect width="4" height="36" fill="#003366"/>
+    <text x="20" y="26" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+      核心成果
+    </text>
+  </g>
+
+  <!-- 成果数据 -->
+  <g transform="translate(60, 620)">
+    <text x="0" y="0" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:40px; font-weight:700;" fill="#003366">
+      58.88%
+    </text>
+    <text x="0" y="35" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+      测试准确率
+    </text>
+  </g>
+
+  <g transform="translate(280, 620)">
+    <text x="0" y="0" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:40px; font-weight:700;" fill="#003366">
+      +21.3%
+    </text>
+    <text x="0" y="35" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#FF8C00">
+      Macro F1提升
+    </text>
+  </g>
+
+  <g transform="translate(560, 620)">
+    <text x="0" y="0" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:40px; font-weight:700;" fill="#003366">
+      27.59%
+    </text>
+    <text x="0" y="35" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#FF8C00">
+      Negative类F1恢复
+    </text>
+  </g>
+
+  <!-- 公司/日期信息 -->
+  <text x="60" y="980" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    本科毕业设计论文答辩 · 2026年2月
+  </text>
+
+  <!-- 右下角装饰 -->
+  <rect x="1800" y="960" width="60" height="60" fill="#003366"/>
+
+  <!-- 页码 -->
+  <text x="1860" y="1040" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D" text-anchor="end">
+    01
+  </text>
+</svg>

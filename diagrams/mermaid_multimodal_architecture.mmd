@@ -1,0 +1,65 @@
+flowchart TD
+    %% 定义样式
+    classDef textNode fill:#E3F2FD,stroke:#1976D2,stroke-width:3px
+    classDef audioNode fill:#E8F5E9,stroke:#43A047,stroke-width:3px
+    classDef videoNode fill:#FFEBEE,stroke:#E53935,stroke-width:3px
+    classDef opNode fill:#E1F5FE,stroke:#0277BD,stroke-width:2px
+    classDef fusionNode fill:#F3E5F5,stroke:#7B1FA2,stroke-width:3px
+    classDef classNode fill:#FFF3E0,stroke:#FF9800,stroke-width:3px
+
+    %% ===== 输入层 =====
+    subgraph Input["输入层"]
+        TInput["文本输入 Text<br/>768维"]:::textNode
+        AInput["音频输入 Audio<br/>74维"]:::audioNode
+        VInput["视频输入 Video<br/>710维"]:::videoNode
+    end
+
+    %% ===== 特征编码层 =====
+    subgraph Encoder["特征编码层"]
+        TEnc["文本编码器<br/>Linear(768→256)<br/>LayerNorm + ReLU"]:::opNode
+        AEnc["音频编码器<br/>Linear(74→128)<br/>LayerNorm + ReLU"]:::opNode
+        VEnc["视频编码器<br/>Linear(710→256)<br/>LayerNorm + ReLU"]:::opNode
+        AProj["音频投影层<br/>Linear(128→256)"]:::opNode
+    end
+
+    %% ===== 跨模态融合层 =====
+    subgraph Fusion["跨模态融合层"]
+        PosEnc["位置编码<br/>Positional Encoding"]:::fusionNode
+        TransFusion["Transformer融合<br/>Multi-Head Attention<br/>4头 × 2层"]:::fusionNode
+        FusionAgg["聚合与融合<br/>Mean Pooling<br/>+ MLP"]:::fusionNode
+    end
+
+    %% ===== 输出层 =====
+    subgraph Output["输出层"]
+        Classifier["分类器<br/>Linear(128→7)"]:::classNode
+        Result["情感预测<br/>7类 + 置信度"]:::classNode
+    end
+
+    %% ===== 连接关系 =====
+    TInput -->|"768D"| TEnc
+    AInput -->|"74D"| AEnc
+    VInput -->|"710D"| VEnc
+
+    AEnc -->|"128D"| AProj
+
+    TEnc -->|"256D"| PosEnc
+    AProj -->|"256D"| PosEnc
+    VEnc -->|"256D"| PosEnc
+
+    PosEnc -->|"3×256D"| TransFusion
+    TransFusion -->|"256D"| FusionAgg
+    FusionAgg -->|"128D"| Classifier
+    Classifier -->|"7类"| Result
+
+    %% ===== 图例 =====
+    subgraph Legend["图例"]
+        LText["📝 文本模态"]:::textNode
+        LAudio["🎵 音频模态"]:::audioNode
+        LVideo["🎬 视频模态"]:::videoNode
+    end
+
+    %% 样式调整
+    style Input fill:#f8f9fa,stroke:#dee2e6,stroke-width:2px,stroke-dasharray: 5 5
+    style Encoder fill:#f8f9fa,stroke:#dee2e6,stroke-width:2px,stroke-dasharray: 5 5
+    style Fusion fill:#f8f9fa,stroke:#dee2e6,stroke-width:2px,stroke-dasharray: 5 5
+    style Output fill:#f8f9fa,stroke:#dee2e6,stroke-width:2px,stroke-dasharray: 5 5

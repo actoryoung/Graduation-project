@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- 纯白背景 -->
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+
+  <!-- 页面标题 -->
+  <text x="80" y="100" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:28px; font-weight:600;" fill="#333333">
+    总结与展望
+  </text>
+
+  <!-- 标题下划线 -->
+  <line x1="80" y1="125" x2="300" y2="125" stroke="#002FA7" stroke-width="2"/>
+
+  <!-- 工作总结 -->
+  <text x="80" y="200" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:20px; font-weight:600;" fill="#333333">
+    工作总结
+  </text>
+
+  <g transform="translate(80, 250)">
+    <rect width="6" height="6" fill="#002FA7"/>
+    <text x="20" y="6" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px;" fill="#333333">
+      设计并实现了完整的多模态情感分析系统
+    </text>
+  </g>
+
+  <g transform="translate(80, 300)">
+    <rect width="6" height="6" fill="#002FA7"/>
+    <text x="20" y="6" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px;" fill="#333333">
+      提出多头跨模态注意力融合机制，准确率提升1.63%
+    </text>
+  </g>
+
+  <g transform="translate(80, 350)">
+    <rect width="6" height="6" fill="#002FA7"/>
+    <text x="20" y="6" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px;" fill="#333333">
+      系统性解决类别不平衡问题，Macro F1提升21.3%
+    </text>
+  </g>
+
+  <g transform="translate(80, 400)">
+    <rect width="6" height="6" fill="#002FA7"/>
+    <text x="20" y="6" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px;" fill="#333333">
+      实现了基于Streamlit的Web演示系统
+    </text>
+  </g>
+
+  <!-- 主要创新点 -->
+  <text x="80" y="510" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:20px; font-weight:600;" fill="#333333">
+    主要创新点
+  </text>
+
+  <rect x="80" y="540" width="840" height="200" fill="#F5F5F5"/>
+
+  <g transform="translate(110, 590)">
+    <text x="0" y="0" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#333333">
+      • 首次系统分析CMU-MOSEI SDK子集数据特性
+    </text>
+    <text x="0" y="35" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#333333">
+      • 揭示预训练模型在小规模数据上的局限性
+    </text>
+    <text x="0" y="70" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#333333">
+      • 提出阈值优化与损失函数调整的组合策略
+    </text>
+    <text x="0" y="105" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#333333">
+      • 验证模型复杂度需与数据规模匹配的原则
+    </text>
+  </g>
+
+  <!-- 未来展望 -->
+  <text x="80" y="810" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:20px; font-weight:600;" fill="#333333">
+    未来工作
+  </text>
+
+  <g transform="translate(80, 850)">
+    <rect width="6" height="6" fill="#002FA7"/>
+    <text x="20" y="6" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#333333">
+      改进Negative类识别能力，探索更有效的类别不平衡处理方法
+    </text>
+  </g>
+
+  <g transform="translate(80, 890)">
+    <rect width="6" height="6" fill="#002FA7"/>
+    <text x="20" y="6" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#333333">
+      实现端到端特征提取，提升系统部署效率
+    </text>
+  </g>
+
+  <g transform="translate(80, 930)">
+    <rect width="6" height="6" fill="#002FA7"/>
+    <text x="20" y="6" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#333333">
+      扩展系统功能以支持实际应用部署
+    </text>
+  </g>
+
+  <!-- 页码 -->
+  <text x="1840" y="1040" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px;" fill="#666666" text-anchor="end">
+    08
+  </text>
+</svg>

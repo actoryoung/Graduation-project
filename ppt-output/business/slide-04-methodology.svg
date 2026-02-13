@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- 白色背景 -->
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+
+  <!-- 顶部深蓝色条 -->
+  <rect x="0" y="0" width="1920" height="6" fill="#003366"/>
+
+  <!-- 标题区 -->
+  <rect x="60" y="50" width="6" height="36" fill="#003366"/>
+  <text x="80" y="80" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:32px; font-weight:700;" fill="#2C3E50">
+    技术方案：多头跨模态注意力融合
+  </text>
+
+  <!-- 特征提取模块 -->
+  <text x="60" y="160" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    多模态特征提取
+  </text>
+
+  <!-- 特征卡片 -->
+  <rect x="60" y="190" width="560" height="180" fill="#F0F4F8"/>
+  <text x="90" y="240" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#003366">
+    文本模态
+  </text>
+  <text x="90" y="280" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    GloVe词向量
+  </text>
+  <text x="90" y="310" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:36px; font-weight:700;" fill="#003366">
+    300D → 64D
+  </text>
+
+  <rect x="640" y="190" width="560" height="180" fill="#F0F4F8"/>
+  <text x="670" y="240" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#003366">
+    音频模态
+  </text>
+  <text x="670" y="280" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    COVAREP特征
+  </text>
+  <text x="670" y="310" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:36px; font-weight:700;" fill="#003366">
+    74D → 64D
+  </text>
+
+  <rect x="1220" y="190" width="560" height="180" fill="#F0F4F8"/>
+  <text x="1250" y="240" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#003366">
+    视频模态
+  </text>
+  <text x="1250" y="280" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    OpenFace特征
+  </text>
+  <text x="1250" y="310" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:36px; font-weight:700;" fill="#003366">
+    710D → 64D
+  </text>
+
+  <!-- MLP说明 -->
+  <text x="60" y="420" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px; font-style:italic;" fill="#7F8C8D">
+    * 各模态通过独立MLP编码器投影到统一的64维空间
+  </text>
+
+  <!-- 融合机制 -->
+  <text x="60" y="480" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    多头跨模态注意力机制
+  </text>
+
+  <rect x="60" y="510" width="900" height="280" fill="#F0F4F8"/>
+
+  <g transform="translate(90, 560)">
+    <rect width="8" height="8" fill="#003366"/>
+    <text x="20" y="8" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+      将三种模态作为序列输入，每个模态视为序列中的一个token
+    </text>
+  </g>
+
+  <g transform="translate(90, 610)">
+    <rect width="8" height="8" fill="#003366"/>
+    <text x="20" y="8" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+      通过自注意力机制学习模态间的动态交互关系
+    </text>
+  </g>
+
+  <g transform="translate(90, 660)">
+    <rect width="8" height="8" fill="#003366"/>
+    <text x="20" y="8" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+      多头机制捕获不同类型的跨模态依赖关系
+    </text>
+  </g>
+
+  <g transform="translate(90, 710)">
+    <rect width="8" height="8" fill="#003366"/>
+    <text x="20" y="8" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+      融合后特征通过全连接层进行情感分类
+    </text>
+  </g>
+
+  <!-- 性能提升 -->
+  <rect x="1000" y="510" width="400" height="280" fill="#003366" fill-opacity="0.05"/>
+  <text x="1030" y="560" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    性能提升
+  </text>
+
+  <text x="1030" y="640" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:56px; font-weight:700;" fill="#003366">
+    +1.63%
+  </text>
+
+  <text x="1030" y="690" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    注意力融合 vs
+  </text>
+  <text x="1030" y="715" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    简单特征拼接
+  </text>
+
+  <!-- 类别不平衡处理 -->
+  <text x="60" y="860" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    类别不平衡处理策略
+  </text>
+
+  <g transform="translate(60, 900)">
+    <rect width="4" height="4" fill="#FF8C00"/>
+    <text x="15" y="5" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#2C3E50">
+      阈值优化：调整分类阈值以平衡召回率和精确率
+    </text>
+  </g>
+
+  <g transform="translate(60, 940)">
+    <rect width="4" height="4" fill="#FF8C00"/>
+    <text x="15" y="5" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#2C3E50">
+      损失函数调整：平方根加权类别损失
+    </text>
+  </g>
+
+  <!-- 页码 -->
+  <text x="1860" y="1040" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D" text-anchor="end">
+    04
+  </text>
+</svg>

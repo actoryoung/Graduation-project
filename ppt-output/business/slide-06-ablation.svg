@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- 白色背景 -->
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+
+  <!-- 顶部深蓝色条 -->
+  <rect x="0" y="0" width="1920" height="6" fill="#003366"/>
+
+  <!-- 标题区 -->
+  <rect x="60" y="50" width="6" height="36" fill="#003366"/>
+  <text x="80" y="80" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:32px; font-weight:700;" fill="#2C3E50">
+    架构对比消融实验
+  </text>
+
+  <!-- 研究动机 -->
+  <text x="60" y="150" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    探究不同模型复杂度在有限数据下的表现差异
+  </text>
+
+  <!-- 对比表格 -->
+  <text x="60" y="210" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    架构性能对比
+  </text>
+
+  <!-- 表格头 -->
+  <rect x="60" y="240" width="1800" height="50" fill="#003366"/>
+  <text x="90" y="272" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:600;" fill="#FFFFFF">
+    架构
+  </text>
+  <text x="350" y="272" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:600;" fill="#FFFFFF">
+    训练Macro F1
+  </text>
+  <text x="600" y="272" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:600;" fill="#FFFFFF">
+    测试Macro F1
+  </text>
+  <text x="900" y="272" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:600;" fill="#FFFFFF">
+    过拟合程度
+  </text>
+  <text x="1200" y="272" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:600;" fill="#FFFFFF">
+    结论
+  </text>
+
+  <!-- GloVe+MLP行 -->
+  <rect x="60" y="290" width="1800" height="50" fill="#003366" fill-opacity="0.05"/>
+  <rect x="60" y="290" width="6" height="50" fill="#003366"/>
+  <text x="90" y="322" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+    GloVe + MLP
+  </text>
+  <text x="350" y="322" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+    0.548
+  </text>
+  <text x="600" y="322" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:700;" fill="#003366">
+    0.501
+  </text>
+  <text x="900" y="322" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#003366">
+    低
+  </text>
+  <text x="1200" y="322" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:700;" fill="#003366">
+    最优
+  </text>
+
+  <!-- BERT+MLP行 -->
+  <rect x="60" y="340" width="1800" height="50" fill="#F0F4F8"/>
+  <text x="90" y="372" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+    BERT + MLP
+  </text>
+  <text x="350" y="372" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+    0.603
+  </text>
+  <text x="600" y="372" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+    0.443
+  </text>
+  <text x="900" y="372" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+    中
+  </text>
+  <text x="1200" y="372" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#7F8C8D">
+    过拟合
+  </text>
+
+  <!-- BERT+Transformer行 -->
+  <rect x="60" y="390" width="1800" height="50" fill="#FF8C00" fill-opacity="0.1"/>
+  <rect x="60" y="390" width="6" height="50" fill="#FF8C00"/>
+  <text x="90" y="422" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+    BERT + Transformer
+  </text>
+  <text x="350" y="422" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+    0.793
+  </text>
+  <text x="600" y="422" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:700;" fill="#FF8C00">
+    0.438
+  </text>
+  <text x="900" y="422" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:700;" fill="#FF8C00">
+    严重
+  </text>
+  <text x="1200" y="422" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:700;" fill="#FF8C00">
+    完全过拟合
+  </text>
+
+  <!-- 核心结论 -->
+  <text x="60" y="500" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    核心结论
+  </text>
+
+  <rect x="60" y="530" width="860" height="180" fill="#003366" fill-opacity="0.05"/>
+  <text x="90" y="580" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:22px; font-weight:700;" fill="#003366">
+    模型复杂度需与数据规模匹配
+  </text>
+  <text x="90" y="620" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#7F8C8D">
+    SDK子集仅2249个训练样本，预训练模型参数量大
+  </text>
+  <text x="90" y="650" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#7F8C8D">
+    导致严重过拟合
+  </text>
+
+  <!-- 实验启示 -->
+  <text x="60" y="770" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    实验启示
+  </text>
+
+  <g transform="translate(60, 810)">
+    <rect width="4" height="4" fill="#003366"/>
+    <text x="15" y="5" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+      预训练模型（BERT）在小规模数据上不一定优于简单特征（GloVe）
+    </text>
+  </g>
+
+  <g transform="translate(60, 860)">
+    <rect width="4" height="4" fill="#003366"/>
+    <text x="15" y="5" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+      Transformer架构的参数量在小数据集上容易导致过拟合
+    </text>
+  </g>
+
+  <g transform="translate(60, 910)">
+    <rect width="4" height="4" fill="#003366"/>
+    <text x="15" y="5" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+      简单架构在有限数据下<tspan font-weight="700" fill="#003366">泛化能力更强</tspan>，为模型选择提供实证依据
+    </text>
+  </g>
+
+  <!-- 页码 -->
+  <text x="1860" y="1040" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D" text-anchor="end">
+    06
+  </text>
+</svg>

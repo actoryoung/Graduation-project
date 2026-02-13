@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- 白色背景 -->
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+
+  <!-- 顶部深蓝色条 -->
+  <rect x="0" y="0" width="1920" height="6" fill="#003366"/>
+
+  <!-- 标题区 -->
+  <rect x="60" y="50" width="6" height="36" fill="#003366"/>
+  <text x="80" y="80" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:32px; font-weight:700;" fill="#2C3E50">
+    主要工作与贡献
+  </text>
+
+  <!-- 贡献1 -->
+  <g transform="translate(60, 140)">
+    <rect width="4" height="4" fill="#003366"/>
+    <text x="20" y="5" style="font-family:SF Pro Display,sans-serif; font-size:48px; font-weight:700;" fill="#003366" fill-opacity="0.15">
+      01
+    </text>
+  </g>
+
+  <rect x="140" y="150" width="1720" height="100" fill="#F0F4F8"/>
+  <text x="170" y="185" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    SDK子集数据特性发现与验证
+  </text>
+  <text x="170" y="220" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    规模约为完整数据集10% | 标签分布差异显著 | 预训练模型在此数据上表现不如简单特征
+  </text>
+
+  <!-- 贡献2 -->
+  <g transform="translate(60, 290)">
+    <rect width="4" height="4" fill="#003366"/>
+    <text x="20" y="5" style="font-family:SF Pro Display,sans-serif; font-size:48px; font-weight:700;" fill="#003366" fill-opacity="0.15">
+      02
+    </text>
+  </g>
+
+  <rect x="140" y="300" width="1720" height="100" fill="#F0F4F8"/>
+  <text x="170" y="335" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    多头跨模态注意力融合机制
+  </text>
+  <text x="170" y="370" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    动态学习模态间交互权重 | 准确率提升1.63%（59.17% vs 57.54%）
+  </text>
+
+  <!-- 贡献3 -->
+  <g transform="translate(60, 440)">
+    <rect width="4" height="4" fill="#003366"/>
+    <text x="20" y="5" style="font-family:SF Pro Display,sans-serif; font-size:48px; font-weight:700;" fill="#003366" fill-opacity="0.15">
+      03
+    </text>
+  </g>
+
+  <rect x="140" y="450" width="1720" height="100" fill="#F0F4F8"/>
+  <text x="170" y="485" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    类别权重策略研究
+  </text>
+  <text x="170" y="520" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    平方根加权损失函数 | Negative F1从0恢复到25.97%
+  </text>
+
+  <!-- 贡献4 -->
+  <g transform="translate(60, 590)">
+    <rect width="4" height="4" fill="#003366"/>
+    <text x="20" y="5" style="font-family:SF Pro Display,sans-serif; font-size:48px; font-weight:700;" fill="#FF8C00" fill-opacity="0.2">
+      04
+    </text>
+  </g>
+
+  <rect x="140" y="600" width="1720" height="100" fill="#003366" fill-opacity="0.05"/>
+  <text x="170" y="635" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#FF8C00">
+    系统性类别不平衡解决方案 · 核心贡献
+  </text>
+  <text x="170" y="670" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    Macro F1提升21.3%（0.4133→0.5011）| Negative F1从0%→27.59% | 保持58.88%准确率
+  </text>
+
+  <!-- 贡献5 -->
+  <g transform="translate(60, 740)">
+    <rect width="4" height="4" fill="#003366"/>
+    <text x="20" y="5" style="font-family:SF Pro Display,sans-serif; font-size:48px; font-weight:700;" fill="#003366" fill-opacity="0.15">
+      05
+    </text>
+  </g>
+
+  <rect x="140" y="750" width="1720" height="100" fill="#F0F4F8"/>
+  <text x="170" y="785" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    架构对比消融实验
+  </text>
+  <text x="170" y="820" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    验证模型复杂度需与数据规模匹配 | 简单架构在有限数据下更有效
+  </text>
+
+  <!-- 页码 -->
+  <text x="1860" y="1040" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D" text-anchor="end">
+    03
+  </text>
+</svg>

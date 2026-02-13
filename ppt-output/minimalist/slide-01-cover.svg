@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- 纯白背景 -->
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+
+  <!-- 左侧装饰条 -->
+  <rect x="80" y="400" width="4" height="120" fill="#002FA7"/>
+
+  <!-- 主标题 -->
+  <text x="100" y="480" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:48px; font-weight:700;" fill="#333333">
+    多模态情感分析系统设计与实现
+  </text>
+
+  <!-- 副标题 -->
+  <text x="100" y="540" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:22px; font-weight:400;" fill="#666666">
+    基于CMU-MOSEI数据集的类别不平衡优化研究
+  </text>
+
+  <!-- 研究领域标签 -->
+  <text x="100" y="620" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:400;" fill="#002FA7">
+    深度学习 · 多模态融合 · 情感分析 · 类别不平衡
+  </text>
+
+  <!-- 底部信息 -->
+  <text x="100" y="980" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#666666">
+    本科毕业设计论文答辩 · 2026年2月
+  </text>
+
+  <!-- 页码 -->
+  <text x="1840" y="1040" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px;" fill="#666666" text-anchor="end">
+    01
+  </text>
+</svg>

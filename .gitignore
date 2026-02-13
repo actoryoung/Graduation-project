@@ -44,3 +44,10 @@ paper-search-mcp/
 docs_archive/
 scripts_archive/
 CMU-MultimodalSDK/
+archive/
+
+# Temp files
+temp*.txt
+temp*.tex
+sample_*.txt
+tfm_*.txt

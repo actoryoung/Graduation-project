@@ -1,0 +1,181 @@
+% 多模态情感分析系统架构图
+% 使用LaTeX TikZ绘制，适合论文发表
+% 编译方式: pdflatex tikz_multimodal_architecture.tex
+
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage{tikz}
+\usepackage{amssymb}
+\usepackage{xeCJK}
+\setCJKmainfont{SimSun}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, fit, backgrounds, calc, shadows.blur, decorations.pathreplacing}
+
+% --- 颜色定义 ---
+% 文本模态 - 蓝色系
+\definecolor{textFill}{HTML}{E3F2FD}
+\definecolor{textStroke}{HTML}{1976D2}
+
+% 音频模态 - 绿色系
+\definecolor{audioFill}{HTML}{E8F5E9}
+\definecolor{audioStroke}{HTML}{43A047}
+
+% 视频模态 - 红色系
+\definecolor{videoFill}{HTML}{FFEBEE}
+\definecolor{videoStroke}{HTML}{E53935}
+
+% 融合层 - 紫色系
+\definecolor{fusionFill}{HTML}{F3E5F5}
+\definecolor{fusionStroke}{HTML}{7B1FA2}
+
+% 操作层 - 灰蓝色系
+\definecolor{opFill}{HTML}{E1F5FE}
+\definecolor{opStroke}{HTML}{0277BD}
+
+% 分类层 - 橙色系
+\definecolor{classFill}{HTML}{FFF3E0}
+\definecolor{classStroke}{HTML}{FF9800}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    node distance=1.0cm and 1.5cm,
+    font=\sffamily\footnotesize,
+    >=Stealth,
+    % --- 样式定义 ---
+    textNode/.style={
+        rectangle, rounded corners=4pt,
+        draw=textStroke, very thick,
+        fill=textFill,
+        minimum width=2.2cm, minimum height=1.0cm,
+        align=center,
+        drop shadow
+    },
+    audioNode/.style={
+        rectangle, rounded corners=4pt,
+        draw=audioStroke, very thick,
+        fill=audioFill,
+        minimum width=2.2cm, minimum height=1.0cm,
+        align=center,
+        drop shadow
+    },
+    videoNode/.style={
+        rectangle, rounded corners=4pt,
+        draw=videoStroke, very thick,
+        fill=videoFill,
+        minimum width=2.2cm, minimum height=1.0cm,
+        align=center,
+        drop shadow
+    },
+    opNode/.style={
+        rectangle, rounded corners=3pt,
+        draw=opStroke, thick,
+        fill=opFill,
+        minimum width=2.0cm, minimum height=0.9cm,
+        align=center,
+        drop shadow
+    },
+    fusionNode/.style={
+        rectangle, rounded corners=4pt,
+        draw=fusionStroke, very thick,
+        fill=fusionFill,
+        minimum width=2.5cm, minimum height=1.1cm,
+        align=center,
+        drop shadow
+    },
+    classNode/.style={
+        rectangle, rounded corners=4pt,
+        draw=classStroke, very thick,
+        fill=classFill,
+        minimum width=2.2cm, minimum height=1.0cm,
+        align=center,
+        drop shadow
+    },
+    group/.style={
+        draw=gray!40, dashed, rounded corners=8pt,
+        inner sep=10pt, fill=gray!5
+    },
+    edgeLabel/.style={
+        font=\scriptsize\itshape,
+        text=gray!70,
+        align=center,
+        midway
+    }
+]
+
+    % ===== 输入层 =====
+    \node[textNode] (textInput) {文本输入\\Text\\768D};
+    \node[audioNode, below=of textInput] (audioInput) {音频输入\\Audio\\74D};
+    \node[videoNode, below=of audioInput] (videoInput) {视频输入\\Video\\710D};
+
+    % ===== 特征编码层 =====
+    \node[opNode, right=of textInput] (textEnc) {文本编码器\\Linear(768→256)};
+    \node[opNode, right=of audioInput] (audioEnc) {音频编码器\\Linear(74→128)};
+    \node[opNode, right=of videoInput] (videoEnc) {视频编码器\\Linear(710→256)};
+
+    % 音频投影层
+    \node[opNode, right=of audioEnc] (audioProj) {音频投影\\Linear(128→256)};
+
+    % ===== 位置编码层 =====
+    \node[fusionNode, right=3.5cm of textEnc] (posEnc) {位置编码\\Positional\\Encoding};
+
+    % 连接编码器到位置编码
+    \draw[->, thick, textStroke] (textEnc) -- (posEnc) node[edgeLabel, above] {256D};
+    \draw[->, thick, audioStroke] (audioProj) -- (posEnc.north -| posEnc.west) node[edgeLabel, above] {256D};
+    \draw[->, thick, videoStroke] (videoEnc) -- (posEnc.south -| posEnc.west) node[edgeLabel, below] {256D};
+
+    % ===== Transformer融合层 =====
+    \node[fusionNode, right=of posEnc] (transFusion) {Transformer融合\\Multi-Head\\Attention\\4头×2层};
+
+    % ===== 融合聚合层 =====
+    \node[opNode, right=of transFusion] (fusionAgg) {聚合与融合\\Mean Pooling\\+ MLP};
+
+    % ===== 分类器 =====
+    \node[classNode, right=of fusionAgg] (classifier) {分类器\\Classifier\\Linear(128→7)};
+
+    % ===== 输出层 =====
+    \node[opNode, right=of classifier] (output) {情感预测\\7类输出\\+置信度};
+
+    % ===== 主连接 =====
+    \draw[->, very thick, gray!70] (textInput) -- (textEnc);
+    \draw[->, very thick, gray!70] (audioInput) -- (audioEnc);
+    \draw[->, very thick, gray!70] (videoInput) -- (videoEnc);
+
+    \draw[->, very thick, gray!70] (audioEnc) -- (audioProj);
+
+    \draw[->, very thick, fusionStroke] (posEnc) -- (transFusion);
+    \draw[->, very thick, fusionStroke] (transFusion) -- (fusionAgg);
+    \draw[->, very thick, classStroke] (fusionAgg) -- (classifier);
+    \draw[->, very thick, classStroke] (classifier) -- (output);
+
+    % ===== 功能分组 =====
+    \begin{scope}[on background layer]
+        % 输入组
+        \node[group, fit=(textInput)(audioInput)(videoInput)] (inputGroup) {};
+        \node[above=0.1cm of inputGroup.north, font=\scriptsize\bfseries, color=gray!60] {输入层};
+
+        % 编码组
+        \node[group, fit=(textEnc)(audioEnc)(audioProj)(videoEnc)] (encGroup) {};
+        \node[above=0.1cm of encGroup.north, font=\scriptsize\bfseries, color=gray!60] {特征编码层};
+
+        % 融合组
+        \node[group, fit=(posEnc)(transFusion)(fusionAgg)] (fusionGroup) {};
+        \node[above=0.1cm of fusionGroup.north, font=\scriptsize\bfseries, color=gray!60] {跨模态融合层};
+
+        % 输出组
+        \node[group, fit=(classifier)(output)] (outputGroup) {};
+        \node[above=0.1cm of outputGroup.north, font=\scriptsize\bfseries, color=gray!60] {输出层};
+    \end{scope}
+
+    % ===== 图例 =====
+    \node[anchor=south east, font=\tiny] at (current bounding box.north east) {
+        \begin{tikzpicture}
+            \node[rectangle, rounded corners=2pt, draw=textStroke, fill=textFill, minimum width=0.5cm, minimum height=0.3cm] at (0,0) {};
+            \node[right=0.1cm] at (0.3,0) {文本};
+            \node[rectangle, rounded corners=2pt, draw=audioStroke, fill=audioFill, minimum width=0.5cm, minimum height=0.3cm] at (1.2,0) {};
+            \node[right=0.1cm] at (1.5,0) {音频};
+            \node[rectangle, rounded corners=2pt, draw=videoStroke, fill=videoFill, minimum width=0.5cm, minimum height=0.3cm] at (2.4,0) {};
+            \node[right=0.1cm] at (2.7,0) {视频};
+        \end{tikzpicture}
+    };
+
+\end{tikzpicture}
+\end{document}

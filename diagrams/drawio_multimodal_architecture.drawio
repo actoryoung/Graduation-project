@@ -1,0 +1,205 @@
+<mxfile host="app.diagrams.net" modified="2025-02-10T00:00:00.000Z" agent="5.0" version="24.0.0">
+  <diagram name="多模态情感分析系统架构" id="multimodal-architecture">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- 标题 -->
+        <mxCell id="title" value="多模态情感分析系统架构图&#xa;Multimodal Sentiment Analysis System Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="500" y="20" width="600" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- 图例 -->
+        <mxCell id="legend-text" value="文本模态" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#E3F2FD;strokeColor=#1976D2;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="50" y="80" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-audio" value="音频模态" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#E8F5E9;strokeColor=#43A047;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="170" y="80" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-video" value="视频模态" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#FFEBEE;strokeColor=#E53935;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="290" y="80" width="100" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- 输入层 -->
+        <mxCell id="input-group" value="输入层 Input Layer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;strokeWidth=2;strokeDasharray=5 5;dashed=1;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="150" width="720" height="240" as="geometry" />
+        </mxCell>
+
+        <mxCell id="text-input" value="文本输入&#xa;Text&#xa;768维" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;strokeWidth=3;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="120" y="180" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="audio-input" value="音频输入&#xa;Audio&#xa;74维" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#43A047;strokeWidth=3;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="120" y="270" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="video-input" value="视频输入&#xa;Video&#xa;710维" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#E53935;strokeWidth=3;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="120" y="300" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- 特征编码层 -->
+        <mxCell id="encoder-group" value="特征编码层 Feature Encoder" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;strokeWidth=2;strokeDasharray=5 5;dashed=1;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="150" width="500" height="240" as="geometry" />
+        </mxCell>
+
+        <mxCell id="text-enc" value="文本编码器&#xa;Linear(768→256)&#xa;LayerNorm + ReLU" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0277BD;strokeWidth=2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="340" y="180" width="130" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="audio-enc" value="音频编码器&#xa;Linear(74→128)&#xa;LayerNorm + ReLU" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0277BD;strokeWidth=2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="340" y="270" width="130" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="video-enc" value="视频编码器&#xa;Linear(710→256)&#xa;LayerNorm + ReLU" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0277BD;strokeWidth=2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="340" y="300" width="130" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="audio-proj" value="音频投影&#xa;Linear(128→256)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0277BD;strokeWidth=2;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="520" y="270" width="110" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- 跨模态融合层 -->
+        <mxCell id="fusion-group" value="跨模态融合层 Cross-Modal Fusion" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;strokeWidth=2;strokeDasharray=5 5;dashed=1;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="150" width="480" height="240" as="geometry" />
+        </mxCell>
+
+        <mxCell id="pos-enc" value="位置编码&#xa;Positional Encoding" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=3;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="940" y="220" width="140" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="trans-fusion" value="Transformer融合&#xa;Multi-Head Attention&#xa;4头 × 2层" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=3;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="210" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fusion-agg" value="聚合与融合&#xa;Mean Pooling + MLP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=3;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="300" width="150" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- 输出层 -->
+        <mxCell id="output-group" value="输出层 Output Layer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#dee2e6;strokeWidth=2;strokeDasharray=5 5;dashed=1;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1460" y="150" width="200" height="240" as="geometry" />
+        </mxCell>
+
+        <mxCell id="classifier" value="分类器&#xa;Classifier&#xa;Linear(128→7)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;strokeWidth=3;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1500" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="output" value="情感预测&#xa;7类输出&#xa;+ 置信度" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;strokeWidth=3;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1500" y="320" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- 连接线 -->
+        <mxCell id="edge1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#1976D2;" edge="1" parent="1" source="text-input" target="text-enc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge1-label" value="768D" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#1976D2;" vertex="1" connectable="0" parent="edge1">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="edge2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#43A047;" edge="1" parent="1" source="audio-input" target="audio-enc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge2-label" value="74D" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#43A047;" vertex="1" connectable="0" parent="edge2">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="edge3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#E53935;" edge="1" parent="1" source="video-input" target="video-enc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge3-label" value="710D" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#E53935;" vertex="1" connectable="0" parent="edge3">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="edge4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="audio-enc" target="audio-proj">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge4-label" value="128D" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;" vertex="1" connectable="0" parent="edge4">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="edge5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#1976D2;" edge="1" parent="1" source="text-enc" target="pos-enc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge5-label" value="256D" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#1976D2;" vertex="1" connectable="0" parent="edge5">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="edge6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#43A047;" edge="1" parent="1" source="audio-proj" target="pos-enc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="660" y="245" />
+              <mxPoint x="660" y="245" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge6-label" value="256D" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#43A047;" vertex="1" connectable="0" parent="edge6">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="edge7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#E53935;" edge="1" parent="1" source="video-enc" target="pos-enc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="520" y="245" />
+              <mxPoint x="520" y="245" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge7-label" value="256D" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#E53935;" vertex="1" connectable="0" parent="edge7">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="edge8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#7B1FA2;" edge="1" parent="1" source="pos-enc" target="trans-fusion">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge8-label" value="3×256D" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#7B1FA2;" vertex="1" connectable="0" parent="edge8">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="edge9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#7B1FA2;" edge="1" parent="1" source="trans-fusion" target="fusion-agg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge9-label" value="256D" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#7B1FA2;" vertex="1" connectable="0" parent="edge9">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="edge10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#FF9800;" edge="1" parent="1" source="fusion-agg" target="classifier">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge10-label" value="128D" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#FF9800;" vertex="1" connectable="0" parent="edge10">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="edge11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#FF9800;" edge="1" parent="1" source="classifier" target="output">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge11-label" value="7类" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#FF9800;" vertex="1" connectable="0" parent="edge11">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

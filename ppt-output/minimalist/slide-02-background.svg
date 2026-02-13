@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- 纯白背景 -->
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+
+  <!-- 页面标题 -->
+  <text x="80" y="100" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:28px; font-weight:600;" fill="#333333">
+    研究背景
+  </text>
+
+  <!-- 标题下划线 -->
+  <line x1="80" y1="125" x2="300" y2="125" stroke="#002FA7" stroke-width="2"/>
+
+  <!-- 研究动机 -->
+  <text x="80" y="200" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:20px; font-weight:600;" fill="#333333">
+    研究动机
+  </text>
+
+  <!-- 要点1 -->
+  <g transform="translate(80, 250)">
+    <rect width="6" height="6" fill="#002FA7"/>
+    <text x="20" y="6" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px;" fill="#333333">
+      社交媒体快速发展，多模态情感分析需求激增
+    </text>
+  </g>
+
+  <!-- 要点2 -->
+  <g transform="translate(80, 300)">
+    <rect width="6" height="6" fill="#002FA7"/>
+    <text x="20" y="6" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px;" fill="#333333">
+      情感表达本质是多模态的：文本+音频+视觉
+    </text>
+  </g>
+
+  <!-- 要点3 -->
+  <g transform="translate(80, 350)">
+    <rect width="6" height="6" fill="#002FA7"/>
+    <text x="20" y="6" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px;" fill="#333333">
+      两大核心挑战：异构模态融合 + 类别不平衡
+    </text>
+  </g>
+
+  <!-- 核心问题 -->
+  <text x="80" y="450" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:20px; font-weight:600;" fill="#333333">
+    核心问题
+  </text>
+
+  <!-- 问题卡片 -->
+  <rect x="80" y="490" width="840" height="180" fill="#F5F5F5"/>
+
+  <!-- 问题1 -->
+  <g transform="translate(110, 540)">
+    <text x="0" y="0" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:600;" fill="#002FA7">
+      问题1：异构模态融合
+    </text>
+    <text x="0" y="30" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#666666">
+      文本、音频、视频特征维度和语义空间差异巨大
+    </text>
+  </g>
+
+  <!-- 问题2 -->
+  <g transform="translate(480, 540)">
+    <text x="0" y="0" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:600;" fill="#002FA7">
+      问题2：类别不平衡
+    </text>
+    <text x="0" y="30" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#666666">
+      SDK子集Negative类仅占10%，模型完全失效
+    </text>
+  </g>
+
+  <!-- 页码 -->
+  <text x="1840" y="1040" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px;" fill="#666666" text-anchor="end">
+    02
+  </text>
+</svg>

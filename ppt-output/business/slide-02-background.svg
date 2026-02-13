@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- 白色背景 -->
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+
+  <!-- 顶部深蓝色条 -->
+  <rect x="0" y="0" width="1920" height="6" fill="#003366"/>
+
+  <!-- 标题区 -->
+  <rect x="60" y="50" width="6" height="36" fill="#003366"/>
+  <text x="80" y="80" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:32px; font-weight:700;" fill="#2C3E50">
+    研究背景与问题定义
+  </text>
+
+  <!-- 研究背景 -->
+  <text x="60" y="160" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    研究背景
+  </text>
+
+  <!-- 背景卡片 -->
+  <rect x="60" y="190" width="860" height="220" fill="#F0F4F8"/>
+
+  <g transform="translate(90, 230)">
+    <rect width="8" height="8" fill="#003366"/>
+    <text x="20" y="8" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+      <tspan font-weight="600">社交媒体快速发展</tspan>，多模态情感分析需求激增
+    </text>
+  </g>
+
+  <g transform="translate(90, 280)">
+    <rect width="8" height="8" fill="#003366"/>
+    <text x="20" y="8" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+      情感表达<tspan font-weight="600" fill="#003366">本质是多模态的</tspan>：文本语义+音频韵律+视觉表情
+    </text>
+  </g>
+
+  <g transform="translate(90, 330)">
+    <rect width="8" height="8" fill="#003366"/>
+    <text x="20" y="8" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+      CMU-MOSEI数据集SDK子集存在<tspan font-weight="600" fill="#FF8C00">严重类别不平衡</tspan>
+    </text>
+  </g>
+
+  <!-- 核心问题 -->
+  <text x="60" y="460" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    两大核心问题
+  </text>
+
+  <!-- 问题卡片1 -->
+  <rect x="60" y="490" width="400" height="200" fill="#F0F4F8"/>
+  <text x="90" y="540" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#003366">
+    问题1：异构模态融合
+  </text>
+  <text x="90" y="590" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    文本、音频、视频特征维度和
+  </text>
+  <text x="90" y="615" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    语义空间差异巨大
+  </text>
+  <text x="90" y="660" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px; font-weight:600;" fill="#FF8C00">
+    挑战：如何有效融合？
+  </text>
+
+  <!-- 问题卡片2 -->
+  <rect x="480" y="490" width="440" height="200" fill="#F0F4F8"/>
+  <text x="510" y="540" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#003366">
+    问题2：类别不平衡
+  </text>
+  <text x="510" y="590" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+    Negative类仅占10%，模型
+  </text>
+  <text x="510" y="615" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+      完全失效（F1=0）
+  </text>
+  <text x="510" y="660" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px; font-weight:600;" fill="#FF8C00">
+    挑战：如何恢复识别能力？
+  </text>
+
+  <!-- 数据分布图示 -->
+  <text x="1000" y="460" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    SDK子集标签分布
+  </text>
+
+  <!-- 简单条形图 -->
+  <g transform="translate(1000, 490)">
+    <!-- Neutral -->
+    <text x="0" y="40" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+      Neutral
+    </text>
+    <rect x="90" y="15" width="336" height="36" fill="#003366"/>
+    <text x="440" y="40" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:700;" fill="#003366">
+      50.4%
+    </text>
+
+    <!-- Positive -->
+    <text x="0" y="110" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+      Positive
+    </text>
+    <rect x="90" y="85" width="264" height="36" fill="#005A9E"/>
+    <text x="440" y="110" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:700;" fill="#005A9E">
+      39.6%
+    </text>
+
+    <!-- Negative -->
+    <text x="0" y="180" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+      Negative
+    </text>
+    <rect x="90" y="155" width="66" height="36" fill="#FF8C00"/>
+    <text x="440" y="180" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:700;" fill="#FF8C00">
+      10%
+    </text>
+  </g>
+
+  <!-- 页码 -->
+  <text x="1860" y="1040" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D" text-anchor="end">
+    02
+  </text>
+</svg>

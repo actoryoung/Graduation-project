@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- 白色背景 -->
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+
+  <!-- 顶部深蓝色条 -->
+  <rect x="0" y="0" width="1920" height="6" fill="#003366"/>
+  <!-- 底部深蓝色条 -->
+  <rect x="0" y="1074" width="1920" height="6" fill="#003366"/>
+
+  <!-- 居中容器 -->
+  <g transform="translate(960, 400)">
+    <!-- 感谢文字 -->
+    <text x="0" y="0" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:72px; font-weight:700;" fill="#003366" text-anchor="middle">
+      感谢聆听
+    </text>
+
+    <!-- 英文翻译 -->
+    <text x="0" y="70" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:28px; font-weight:400;" fill="#7F8C8D" text-anchor="middle">
+      Thank You
+    </text>
+  </g>
+
+  <!-- 装饰线 -->
+  <line x1="660" y1="530" x2="1260" y2="530" stroke="#003366" stroke-width="2"/>
+
+  <!-- 邀请提问 -->
+  <text x="960" y="610" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:22px;" fill="#7F8C8D" text-anchor="middle">
+    欢迎提问与交流
+  </text>
+
+  <!-- 底部信息 -->
+  <text x="960" y="950" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#7F8C8D" text-anchor="middle">
+    多模态情感分析系统设计与实现
+  </text>
+  <text x="960" y="980" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D" text-anchor="middle">
+    基于CMU-MOSEI数据集的类别不平衡优化研究 · 2026年本科毕业设计答辩
+  </text>
+
+  <!-- 页码 -->
+  <text x="1860" y="1040" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D" text-anchor="end">
+    09
+  </text>
+</svg>

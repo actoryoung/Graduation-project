@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- 白色背景 -->
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+
+  <!-- 顶部深蓝色条 -->
+  <rect x="0" y="0" width="1920" height="6" fill="#003366"/>
+
+  <!-- 标题区 -->
+  <rect x="60" y="50" width="6" height="36" fill="#003366"/>
+  <text x="80" y="80" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:32px; font-weight:700;" fill="#2C3E50">
+    实验结果与性能提升
+  </text>
+
+  <!-- 核心指标 -->
+  <text x="60" y="160" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    核心指标
+  </text>
+
+  <!-- 指标卡片 -->
+  <g transform="translate(60, 190)">
+    <rect width="540" height="160" fill="#F0F4F8"/>
+    <text x="30" y="60" style="font-family:SF Pro Display,sans-serif; font-size:56px; font-weight:700;" fill="#003366">
+      58.88%
+    </text>
+    <text x="30" y="100" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#7F8C8D">
+      测试准确率
+    </text>
+    <text x="380" y="100" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D">
+      678样本
+    </text>
+  </g>
+
+  <g transform="translate(620, 190)">
+    <rect width="540" height="160" fill="#F0F4F8"/>
+    <text x="30" y="60" style="font-family:SF Pro Display,sans-serif; font-size:56px; font-weight:700;" fill="#003366">
+      0.5011
+    </text>
+    <text x="30" y="100" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#7F8C8D">
+      Macro F1分数
+    </text>
+    <text x="380" y="60" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:28px; font-weight:700;" fill="#FF8C00">
+      ↑ 21.3%
+    </text>
+    <text x="380" y="100" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#FF8C00">
+      显著提升
+    </text>
+  </g>
+
+  <g transform="translate(1180, 190)">
+    <rect width="540" height="160" fill="#F0F4F8"/>
+    <text x="30" y="60" style="font-family:SF Pro Display,sans-serif; font-size:56px; font-weight:700;" fill="#FF8C00">
+      27.59%
+    </text>
+    <text x="30" y="100" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#7F8C8D">
+      Negative类F1
+    </text>
+    <text x="380" y="60" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:28px; font-weight:700;" fill="#FF8C00">
+      完全恢复
+    </text>
+    <text x="380" y="100" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#FF8C00">
+      从0%恢复
+    </text>
+  </g>
+
+  <!-- 优化方案对比 -->
+  <text x="60" y="420" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight:600;" fill="#2C3E50">
+    系统性优化方案对比
+  </text>
+
+  <!-- 表格头 -->
+  <rect x="60" y="450" width="1800" height="50" fill="#003366"/>
+  <text x="90" y="482" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:600;" fill="#FFFFFF">
+    模型版本
+  </text>
+  <text x="350" y="482" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:600;" fill="#FFFFFF">
+    准确率
+  </text>
+  <text x="550" y="482" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:600;" fill="#FFFFFF">
+    Macro F1
+  </text>
+  <text x="780" y="482" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:600;" fill="#FFFFFF">
+    Negative F1
+  </text>
+  <text x="1050" y="482" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:600;" fill="#FFFFFF">
+    主要改进
+  </text>
+
+  <!-- Baseline行 -->
+  <rect x="60" y="500" width="1800" height="50" fill="#F0F4F8"/>
+  <text x="90" y="532" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+    Baseline (S10-1)
+  </text>
+  <text x="350" y="532" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+    59.17%
+  </text>
+  <text x="550" y="532" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+    0.4133
+  </text>
+  <text x="780" y="532" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#95A5A6">
+    0.00%
+  </text>
+  <text x="1050" y="532" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#7F8C8D">
+    注意力融合基线
+  </text>
+
+  <!-- 加权损失行 -->
+  <rect x="60" y="550" width="1800" height="50" fill="#FFFFFF"/>
+  <text x="90" y="582" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+    S10-2 (加权损失)
+  </text>
+  <text x="350" y="582" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+    56.80%
+  </text>
+  <text x="550" y="582" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+    0.4237
+  </text>
+  <text x="780" y="582" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#005A9E">
+    25.97%
+  </text>
+  <text x="1050" y="582" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#7F8C8D">
+    类别权重策略
+  </text>
+
+  <!-- 最终方案行 -->
+  <rect x="60" y="600" width="1800" height="50" fill="#003366" fill-opacity="0.1"/>
+  <rect x="60" y="600" width="6" height="50" fill="#FF8C00"/>
+  <text x="90" y="632" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:600;" fill="#FF8C00">
+    S10-3 CE (最终方案)
+  </text>
+  <text x="350" y="632" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:600;" fill="#FF8C00">
+    58.88%
+  </text>
+  <text x="550" y="632" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:600;" fill="#FF8C00">
+    0.5011
+  </text>
+  <text x="780" y="632" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:600;" fill="#FF8C00">
+    27.59%
+  </text>
+  <text x="1050" y="632" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px; font-weight:600;" fill="#FF8C00">
+    阈值优化 + 交叉熵损失
+  </text>
+
+  <!-- 关键发现 -->
+  <text x="60" y="720" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:18px; font-weight=600;" fill="#2C3E50">
+    关键发现
+  </text>
+
+  <g transform="translate(60, 760)">
+    <rect width="4" height="4" fill="#003366"/>
+    <text x="15" y="5" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+      注意力融合相比简单拼接提升<tspan font-weight="700" fill="#FF8C00">1.63%</tspan>准确率，验证动态模态交互的有效性
+    </text>
+  </g>
+
+  <g transform="translate(60, 810)">
+    <rect width="4" height="4" fill="#003366"/>
+    <text x="15" y="5" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+      类别权重能够恢复少数类识别能力，但存在准确率与类别平衡的权衡
+    </text>
+  </g>
+
+  <g transform="translate(60, 860)">
+    <rect width="4" height="4" fill="#003366"/>
+    <text x="15" y="5" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:16px;" fill="#2C3E50">
+      阈值优化能够在保持准确率的同时改善Macro F1，实现<tspan font-weight="700" fill="#FF8C00">+21.3%</tspan>的提升
+    </text>
+  </g>
+
+  <!-- 页码 -->
+  <text x="1860" y="1040" style="font-family:Microsoft YaHei,SimHei,PingFang SC,sans-serif; font-size:14px;" fill="#7F8C8D" text-anchor="end">
+    05
+  </text>
+</svg>
