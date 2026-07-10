@@ -36,6 +36,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(
 
 from config import Config, EMOTIONS
 
+EMOTIONS_3 = ['negative', 'neutral', 'positive']
+
 
 class Predictor:
     """
@@ -93,22 +95,51 @@ class Predictor:
             'temp' in model_path.lower() and
             os.path.exists(model_path)
         )
+        
+        # 检测是否是注意力融合模型（S10或baseline_attention）
+        self.is_attention_model = (
+            model_path and 
+            ('s10' in model_path.lower() or 'baseline_attention' in model_path.lower())
+        )
 
         # 如果是临时模型，使用临时模型架构
         if self.is_temp_model:
             from src.models.temp_model import ImprovedModel
             self.model = model or ImprovedModel()
+            # temp_model 有 device 属性
+            self.device = self.model.device
         elif model_path and 'bert_hybrid' in model_path.lower():
             # BERT混合模型使用特定架构
             from src.models.bert_hybrid_model import BERTHybridModel
             self.model = model or BERTHybridModel()
+            # BERTHybridModel 可能没有 device 属性，手动设置
+            if hasattr(self.model, 'device'):
+                self.device = self.model.device
+            else:
+                self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+                self.model.to(self.device)
+        elif self.is_attention_model:
+            # S10 和 baseline_attention 模型使用 AttentionFusionModel
+            # 特征维度: text=300(GloVe), audio=74(COVAREP), video=710(OpenFace)
+            from src.models.attention_fusion_model import AttentionFusionModel
+            self.model = model or AttentionFusionModel(
+                text_dim=300,
+                audio_dim=74,
+                video_dim=710,
+                fusion_dim=256,
+                num_classes=3,  # 3分类
+                dropout_rate=0.3,
+                num_heads=4
+            )
+            # AttentionFusionModel 没有 device 属性，手动设置
+            self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+            self.model.to(self.device)
         else:
             # 动态导入（避免循环导入）
             from src.models.fusion_module import MultimodalFusionModule
             self.model = model or MultimodalFusionModule()
-
-        # 获取设备（在加载模型前）
-        self.device = self.model.device
+            # 获取设备（在加载模型前）
+            self.device = self.model.device
 
         # 加载预训练模型（如果提供）
         if model_path is not None:
@@ -117,11 +148,16 @@ class Predictor:
         # 保存数据源配置
         self.data_source = Config.data_source
 
-        # 根据数据源初始化文本特征提取器
+        # 根据模型类型初始化文本特征提取器
         if text_extractor is None:
-            # 强制使用BERT特征提取器（用于BERT混合模型）
-            from src.features.text_features import BERTFeatureExtractor
-            self.text_extractor = BERTFeatureExtractor()
+            if self.is_attention_model:
+                # S10/baseline_attention 模型使用 GloVe (300维)
+                from src.features.glove_extractor import GloVeFeatureExtractor
+                self.text_extractor = GloVeFeatureExtractor()
+            else:
+                # BERT混合模型或其他模型使用 BERT (768维)
+                from src.features.text_features import BERTFeatureExtractor
+                self.text_extractor = BERTFeatureExtractor()
         else:
             self.text_extractor = text_extractor
 
@@ -129,6 +165,30 @@ class Predictor:
         if self.is_temp_model:
             self.audio_extractor = None
             self.video_extractor = None
+        elif self.is_attention_model:
+            # S10/baseline_attention模型使用预提取的COVAREP(74)+OpenFace(710)特征
+            # 尝试使用实时COVAREP兼容提取器（74维）
+            try:
+                from src.features.covarep_extractor import COVAREPFeatureExtractor
+                self.audio_extractor = audio_extractor or COVAREPFeatureExtractor()
+            except Exception as e:
+                warnings.warn(f"COVAREP实时提取器初始化失败: {e}，音频功能将不可用")
+                self.audio_extractor = None
+
+            # 启用ResNet视频特征提取器（710维，兼容CMU-MOSEI）
+            try:
+                from src.features.resnet_video_extractor import ResNetVideoFeatureExtractor
+                self.video_extractor = video_extractor or ResNetVideoFeatureExtractor()
+                print("[OK] 视频特征提取器已启用 (ResNet -> 710维)")
+            except Exception as e:
+                warnings.warn(f"ResNet视频特征提取器初始化失败: {e}，尝试使用OpenFace")
+                try:
+                    from src.features.video_features import OpenFaceFeatureExtractor
+                    self.video_extractor = video_extractor or OpenFaceFeatureExtractor()
+                    print("[OK] 视频特征提取器已启用 (OpenFace)")
+                except Exception as e2:
+                    warnings.warn(f"OpenFace视频特征提取器初始化失败: {e2}，视频功能将不可用")
+                    self.video_extractor = None
         else:
             # 初始化可选的组件（允许失败）
             try:
@@ -273,11 +333,18 @@ class Predictor:
         video_feat_tensor = self._to_tensor(video_feat) if video_feat is not None else None
 
         # 使用模型预测
-        result = self.model.predict(
-            text_feat=text_feat_tensor,
-            audio_feat=audio_feat_tensor,
-            video_feat=video_feat_tensor
-        )
+        if hasattr(self.model, 'predict'):
+            result = self.model.predict(
+                text_feat=text_feat_tensor,
+                audio_feat=audio_feat_tensor,
+                video_feat=video_feat_tensor
+            )
+        else:
+            result = self._predict_by_forward(
+                text_feat_tensor=text_feat_tensor,
+                audio_feat_tensor=audio_feat_tensor,
+                video_feat_tensor=video_feat_tensor
+            )
 
         # 添加可用模态信息
         result['available_modalities'] = available_modalities
@@ -448,6 +515,33 @@ class Predictor:
         tensor = tensor.to(self.device)
 
         return tensor
+
+    def _predict_by_forward(
+        self,
+        text_feat_tensor: Optional[torch.Tensor],
+        audio_feat_tensor: Optional[torch.Tensor],
+        video_feat_tensor: Optional[torch.Tensor]
+    ) -> Dict:
+        """对不提供predict接口的模型执行前向推理。"""
+        if self.is_attention_model:
+            text = text_feat_tensor if text_feat_tensor is not None else torch.zeros((1, 300), device=self.device)
+            audio = audio_feat_tensor if audio_feat_tensor is not None else torch.zeros((1, 74), device=self.device)
+            video = video_feat_tensor if video_feat_tensor is not None else torch.zeros((1, 710), device=self.device)
+
+            with torch.no_grad():
+                logits = self.model(text, audio, video)
+                probs = torch.softmax(logits, dim=1).squeeze(0).cpu().numpy()
+
+            emotions = EMOTIONS_3 if probs.shape[0] == 3 else EMOTIONS[:probs.shape[0]]
+            pred_idx = int(np.argmax(probs))
+
+            return {
+                'emotion': emotions[pred_idx],
+                'confidence': float(probs[pred_idx]),
+                'probabilities': {emotions[i]: float(probs[i]) for i in range(len(emotions))}
+            }
+
+        raise RuntimeError(f"当前模型 {type(self.model).__name__} 不支持predict接口，且未实现forward推理适配")
 
     def set_model_eval_mode(self):
         """将模型设置为评估模式"""

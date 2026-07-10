@@ -22,6 +22,8 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, PROJECT_ROOT)
 
 from src.models.attention_fusion_model import AttentionFusionModel
+from src.features.covarep_extractor import COVAREPFeatureExtractor
+from src.features.glove_extractor import GloVeFeatureExtractor
 
 
 class S7EnsemblePredictor:
@@ -67,9 +69,15 @@ class S7EnsemblePredictor:
             model.to(self.device)
             self.models.append(model)
 
+        # 初始化特征提取器
+        self.text_extractor = GloVeFeatureExtractor()
+        self.audio_extractor = COVAREPFeatureExtractor()
+        
         print(f"[S7Ensemble] 已加载 {len(self.models)} 个模型")
         print(f"[S7Ensemble] 权重: {self.weights}")
         print(f"[S7Ensemble] 设备: {self.device}")
+        print(f"[S7Ensemble] 文本提取器: GloVeFeatureExtractor (300维)")
+        print(f"[S7Ensemble] 音频提取器: COVAREPFeatureExtractor (74维)")
 
     def _load_model(self, model_path: str) -> AttentionFusionModel:
         """加载单个模型"""
@@ -84,10 +92,18 @@ class S7EnsemblePredictor:
             audio_dim = state_dict['audio_encoder.0.weight'].shape[1]
             video_dim = state_dict['video_encoder.0.weight'].shape[1]
         else:
-            # 默认配置
-            text_dim = 300
-            audio_dim = 74
-            video_dim = 710
+            # checkpoint直接就是state_dict
+            state_dict = checkpoint
+            # 尝试从state_dict推断维度
+            if 'text_encoder.0.weight' in state_dict:
+                text_dim = state_dict['text_encoder.0.weight'].shape[1]
+                audio_dim = state_dict['audio_encoder.0.weight'].shape[1]
+                video_dim = state_dict['video_encoder.0.weight'].shape[1]
+            else:
+                # 默认配置
+                text_dim = 300
+                audio_dim = 74
+                video_dim = 710
 
         # 创建模型
         model = AttentionFusionModel(
@@ -102,15 +118,21 @@ class S7EnsemblePredictor:
         return model
 
     def predict(self,
+                text: Optional[str] = None,
                 text_features: Optional[np.ndarray] = None,
+                audio_path: Optional[str] = None,
                 audio_features: Optional[np.ndarray] = None,
+                video_path: Optional[str] = None,
                 video_features: Optional[np.ndarray] = None) -> Dict[str, Any]:
         """
         集成预测
 
         Args:
+            text: 文本输入字符串（用于实时提取 GloVe 特征）
             text_features: 文本特征 (1, 300) or (batch, 300)
+            audio_path: 音频文件路径（用于实时提取 COVAREP 特征）
             audio_features: 音频特征 (1, 74) or (batch, 74)
+            video_path: 视频文件路径（暂不支持）
             video_features: 视频特征 (1, 710) or (batch, 710)
 
         Returns:
@@ -119,12 +141,26 @@ class S7EnsemblePredictor:
                 'emotion': 情感类别,
                 'emotion_zh': 中文情感,
                 'probabilities': 各类别概率,
-                'confidence': 置信度
+                'confidence': 置信度,
+                'available_modalities': 使用的模态列表
             }
         """
+        # 如果提供了文本字符串，提取特征
+        if text is not None and text_features is None:
+            text_features = self.text_extractor.extract(text)
+        
+        # 如果提供了音频路径，提取特征
+        if audio_path is not None and audio_features is None:
+            audio_features = self.audio_extractor.extract_from_raw(audio_path)
+        
+        # 视频路径暂不支持（可以在将来添加）
+        if video_path is not None:
+            import warnings
+            warnings.warn("视频特征实时提取暂未实现，将使用零向量填充")
+        
         # 验证输入
         if text_features is None and audio_features is None and video_features is None:
-            raise ValueError("至少需要提供一种模态的特征")
+            raise ValueError("至少需要提供一种模态的特征或输入")
 
         # 转换为tensor并移动到设备
         text_tensor = self._prepare_input(text_features, 300)
@@ -142,8 +178,11 @@ class S7EnsemblePredictor:
                 # 加权
                 probs_list.append(probs * weight)
 
-        # 加权平均
+        # 加权平均（归一化）
         ensemble_probs = torch.stack(probs_list).sum(dim=0)
+        # 除以权重总和进行归一化
+        weights_sum = sum(self.weights)
+        ensemble_probs = ensemble_probs / weights_sum
 
         # 获取预测结果
         prob_array = ensemble_probs.cpu().numpy()[0]  # (num_classes,)
@@ -153,6 +192,15 @@ class S7EnsemblePredictor:
         # 类别映射
         emotions = ['Negative', 'Neutral', 'Positive']
         emotions_zh = ['负面', '中性', '正面']
+        
+        # 记录可用的模态
+        available_modalities = []
+        if text_features is not None:
+            available_modalities.append('text')
+        if audio_features is not None:
+            available_modalities.append('audio')
+        if video_features is not None:
+            available_modalities.append('video')
 
         return {
             'emotion': emotions[pred_class],
@@ -162,13 +210,18 @@ class S7EnsemblePredictor:
                 'Neutral': float(prob_array[1]),
                 'Positive': float(prob_array[2])
             },
-            'confidence': confidence
+            'confidence': confidence,
+            'available_modalities': available_modalities
         }
 
-    def _prepare_input(self, features: Optional[np.ndarray], expected_dim: int) -> Optional[torch.Tensor]:
-        """准备输入tensor"""
+    def _prepare_input(self, features: Optional[np.ndarray], expected_dim: int) -> torch.Tensor:
+        """准备输入tensor
+        
+        如果特征为None，返回零向量；否则转换为tensor并移动到设备。
+        """
         if features is None:
-            return None
+            # 使用零向量替代缺失的模态
+            features = np.zeros((1, expected_dim), dtype=np.float32)
 
         # 转换为tensor
         tensor = torch.FloatTensor(features)
@@ -189,8 +242,8 @@ def create_s7v1_predictor(device: str = 'cuda') -> S7EnsemblePredictor:
         S7EnsemblePredictor实例
     """
     model_paths = [
-        os.path.join(PROJECT_ROOT, 'checkpoints', 'baseline_attention_3class_weighted_best_model.pth'),
-        os.path.join(PROJECT_ROOT, 'checkpoints', 'baseline_attention_3class_ce_best_model.pth')
+        os.path.join(PROJECT_ROOT, 'checkpoints', '05_baseline', 'baseline_attention_3class_weighted_best_model.pth'),
+        os.path.join(PROJECT_ROOT, 'checkpoints', '05_baseline', 'baseline_attention_3class_ce_best_model.pth')
     ]
 
     weights = [1.5, 1.0]

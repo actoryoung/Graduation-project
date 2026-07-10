@@ -4,12 +4,13 @@ OpenFace视频特征提取器模块
 
 本模块实现了基于OpenFace的视频特征提取器，用于从视频文件中提取
 面部动作单元(Action Units)特征。OpenFace能够检测面部关键点并计算
-17个动作单元的强度，结合头部姿态和视线方向形成25维特征向量。
+17个动作单元的强度，结合头部姿态和视线方向形成基础特征向量，
+最终维度由配置 `VIDEO_DIM` 统一控制（当前主线为710）。
 
 主要功能:
     - 使用OpenFace工具提取面部动作单元特征
     - 自动提取视频帧并处理
-    - 输出25维特征向量（17维AU + 6维姿态 + 2维注视）
+    - 输出固定维度特征向量（基础为17维AU + 6维姿态 + 2维注视，再按VIDEO_DIM对齐）
     - 支持降级方案（OpenFace失败时返回零向量）
     - 完整异常处理
 
@@ -190,7 +191,7 @@ class OpenFaceFeatureExtractor(FeatureExtractor):
             video_path: 视频文件路径
 
         Returns:
-            np.ndarray: 25维特征向量，dtype为float32
+            np.ndarray: 固定维度特征向量，dtype为float32
                         如果OpenFace失败，返回零向量
 
         示例:
@@ -212,7 +213,7 @@ class OpenFaceFeatureExtractor(FeatureExtractor):
             video_path: 视频文件路径
 
         Returns:
-            np.ndarray: 25维特征向量
+            np.ndarray: 固定维度特征向量
         """
         try:
             return self._extract_openface_features(video_path)
@@ -230,7 +231,7 @@ class OpenFaceFeatureExtractor(FeatureExtractor):
             video_path: 视频文件路径
 
         Returns:
-            np.ndarray: 25维特征向量
+            np.ndarray: 固定维度特征向量
 
         Raises:
             RuntimeError: 当OpenFace执行失败时
@@ -303,7 +304,7 @@ class OpenFaceFeatureExtractor(FeatureExtractor):
             csv_path: CSV文件路径
 
         Returns:
-            np.ndarray: 平均池化后的25维特征向量
+            np.ndarray: 平均池化后的固定维度特征向量
 
         Raises:
             RuntimeError: 当CSV解析失败时
@@ -367,7 +368,7 @@ class OpenFaceFeatureExtractor(FeatureExtractor):
         # 平均池化
         avg_features = features.mean(axis=0)  # (num_features,)
 
-        # 确保输出维度正确（填充或截断到25维）
+        # 确保输出维度正确（填充或截断到self.feature_dim）
         if len(avg_features) < self.feature_dim:
             # 填充零
             padded = np.zeros(self.feature_dim, dtype=np.float32)
@@ -387,7 +388,7 @@ class OpenFaceFeatureExtractor(FeatureExtractor):
             csv_path: CSV文件路径
 
         Returns:
-            np.ndarray: 25维特征向量
+            np.ndarray: 固定维度特征向量
         """
         import csv
 
@@ -410,10 +411,10 @@ class OpenFaceFeatureExtractor(FeatureExtractor):
                         frame_features.append(float(row[key]))
                     except ValueError:
                         frame_features.append(0.0)
-            # 简化版本：只返回25维零向量（因为没有pandas时解析复杂）
-            if len(frame_features) < 25:
-                frame_features.extend([0.0] * (25 - len(frame_features)))
-            features_list.append(frame_features[:25])
+            # 简化版本：按目标维度补零/截断（因为没有pandas时解析复杂）
+            if len(frame_features) < self.feature_dim:
+                frame_features.extend([0.0] * (self.feature_dim - len(frame_features)))
+            features_list.append(frame_features[:self.feature_dim])
 
         if not features_list:
             return np.zeros(self.feature_dim, dtype=np.float32)

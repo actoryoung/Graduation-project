@@ -18,34 +18,75 @@ from config import Config
 
 
 class GloVeWordEmbeddings:
-    """GloVe词向量加载和管理"""
+    """GloVe词向量加载和管理
+
+    优先加载 gensim .bin 二进制格式（加载速度快），
+    如果 .bin 不存在，回退到纯文本 .txt 格式。
+    """
 
     def __init__(self, glove_path: Optional[str] = None):
         """
         初始化GloVe词向量
 
         Args:
-            glove_path: GloVe文件路径，默认使用config中的路径
+            glove_path: GloVe文件路径，默认自动查找
+            - 优先查找: data/glove/glove.6B.300d.bin
+            - 回退查找: data/glove/glove.6B.300d.txt
         """
+        # 如果没有指定路径，自动查找
         if glove_path is None:
-            # 默认路径
             glove_dir = os.path.join(project_root, 'data', 'glove')
-            glove_path = os.path.join(glove_dir, 'glove.6B.300d.txt')
+            # 优先尝试 .bin 格式（加载更快）
+            bin_path = os.path.join(glove_dir, 'glove.6B.300d.bin')
+            txt_path = os.path.join(glove_dir, 'glove.6B.300d.txt')
+
+            if os.path.exists(bin_path):
+                glove_path = bin_path
+            else:
+                glove_path = txt_path
 
         self.glove_path = glove_path
         self.embeddings: Dict[str, np.ndarray] = {}
         self.dimension = 300
+        self._using_gensim = False
 
         # 尝试加载
         if os.path.exists(glove_path):
-            self._load_glove_file()
+            if glove_path.endswith('.bin'):
+                self._load_gensim_bin()
+            else:
+                self._load_txt_file()
         else:
             print(f"[警告] GloVe文件不存在: {glove_path}")
             print("将使用简化版特征提取器")
 
-    def _load_glove_file(self):
-        """加载GloVe词向量文件"""
-        print(f"正在加载GloVe词向量: {self.glove_path}")
+    def _load_gensim_bin(self):
+        """使用gensim加载二进制格式 .bin"""
+        print(f"正在加载GloVe词向量（gensim二进制格式）: {self.glove_path}")
+        try:
+            from gensim.models import KeyedVectors
+            wv = KeyedVectors.load_word2vec_format(self.glove_path, binary=True)
+
+            # 转换为字典格式
+            for word in wv.index_to_key:
+                self.embeddings[word] = wv[word].astype(np.float32)
+
+            self.dimension = wv.vector_size
+            self._using_gensim = True
+
+            print(f"[成功] 已加载 {len(self.embeddings)} 个词向量")
+            print(f"   维度: {self.dimension}, 格式: gensim .bin")
+
+        except ImportError:
+            print(f"gensim未安装，回退到纯文本加载")
+            self._load_txt_file()
+        except Exception as e:
+            print(f"gensim加载失败: {e}，回退到纯文本加载")
+            self._load_txt_file()
+
+    def _load_txt_file(self):
+        """加载纯文本格式 .txt"""
+        print(f"正在加载GloVe词向量（纯文本格式）: {self.glove_path}")
 
         word_count = 0
         with open(self.glove_path, 'r', encoding='utf-8') as f:
@@ -63,7 +104,7 @@ class GloVeWordEmbeddings:
                     word_count += 1
 
         print(f"[成功] 已加载 {word_count} 个词向量")
-        print(f"词向量维度: {self.dimension}")
+        print(f"   维度: {self.dimension}, 格式: 纯文本 .txt")
 
     def get_embedding(self, word: str) -> Optional[np.ndarray]:
         """

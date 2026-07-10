@@ -39,7 +39,7 @@ echo "[信息] 启动Web应用..."
 echo ""
 echo "============================================================"
 echo "应用将在浏览器中自动打开"
-echo "如果浏览器未自动打开，请访问: http://localhost:8501"
+echo "如果浏览器未自动打开，请访问: http://localhost:18001"
 echo "按 Ctrl+C 停止服务器"
 echo "============================================================"
 echo ""
@@ -48,4 +48,4 @@ echo ""
 cd "$(dirname "$0")/.."
 
 # 启动Streamlit应用
-streamlit run web/app.py
+streamlit run web/app.py --server.port 18001

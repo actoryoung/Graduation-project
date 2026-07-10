@@ -76,7 +76,9 @@ class Wav2VecFeatureExtractor(FeatureExtractor):
         super().__init__(device)
 
         # 设置模型名称和参数
-        self.model_name = model_name or AUDIO_MODEL
+        # 注意: 使用 'facebook/wav2vec2-base' 而不是 Config.AUDIO_MODEL
+        # 因为 AUDIO_MODEL 通常设置为 'covarep' (特征名称，不是模型ID)
+        self.model_name = model_name or 'facebook/wav2vec2-base'
         self.target_sample_rate = TARGET_SAMPLE_RATE
         self.feature_dim = AUDIO_DIM
         self.max_duration = MAX_AUDIO_DURATION
@@ -152,10 +154,28 @@ class Wav2VecFeatureExtractor(FeatureExtractor):
                 raise FileNotFoundError(f"音频文件不存在: {raw_input}")
 
             try:
-                # 加载音频
+                # 先尝试用 torchaudio 加载
                 waveform, sample_rate = self.torchaudio.load(raw_input)
-            except Exception as e:
-                raise ValueError(f"加载音频文件失败 ({raw_input}): {e}")
+            except Exception as e_torch:
+                # torchaudio 失败时，尝试用 scipy 作为备用
+                try:
+                    from scipy.io import wavfile
+                    sample_rate, audio_data = wavfile.read(raw_input)
+                    # 转换为 float32 并归一化到 [-1, 1]
+                    if audio_data.dtype == np.int16:
+                        audio_data = audio_data.astype(np.float32) / 32768.0
+                    elif audio_data.dtype == np.int32:
+                        audio_data = audio_data.astype(np.float32) / 2147483648.0
+                    # 处理立体声（转为单声道）
+                    if len(audio_data.shape) > 1:
+                        audio_data = audio_data.mean(axis=1)
+                    waveform = torch.from_numpy(audio_data).unsqueeze(0).float()
+                except Exception as e_scipy:
+                    raise ValueError(
+                        f"加载音频文件失败 ({raw_input})。"
+                        f"torchaudio 错误: {e_torch}; "
+                        f"scipy 备用错误: {e_scipy}"
+                    )
 
         elif isinstance(raw_input, tuple) and len(raw_input) == 2:
             # (audio, sample_rate) 元组

@@ -136,10 +136,7 @@ if DEVICE == 'cuda':
     torch.backends.cudnn.benchmark = False
 
 # 打印设备信息
-print(f"使用设备: {DEVICE}")
-if DEVICE == 'cuda':
-    print(f"GPU: {torch.cuda.get_device_name(0)}")
-    print(f"显存: {torch.cuda.get_device_properties(0).total_memory / 1024**3:.2f} GB")
+# 仅在主模块运行时打印，避免被导入时重复打印
 
 # =============================================================================
 # Web配置
